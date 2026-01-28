@@ -1,16 +1,6 @@
 import EventCard from "@/components/EventCard"
 import ExploreBtn from "@/components/ExploreBtn"
-
-const events = [
-  { 
-    image: '/images/event1.png', 
-    title: 'Event 1',
-    slug: 'event-1',
-    location: 'location-1',
-    date: 'Date-1',
-    time: 'Time-1',
-  },
-]
+import events from '@/lib/constants';
 
 const Page = () => {
   return (
