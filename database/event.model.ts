@@ -129,7 +129,12 @@ EventSchema.pre('save', async function () {
   }
 });
 
-// Helper function to generate URL-friendly slug
+/**
+ * Create a URL-friendly slug from an event title.
+ *
+ * @param title - The event title to convert into a slug
+ * @returns The URL-safe slug: lowercase, words separated by single hyphens, with special characters removed and no leading or trailing hyphens
+ */
 function generateSlug(title: string): string {
   return title
     .toLowerCase()
@@ -140,7 +145,13 @@ function generateSlug(title: string): string {
     .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
 }
 
-// Helper function to normalize date to ISO format
+/**
+ * Normalize an input date string to the ISO date portion (YYYY-MM-DD).
+ *
+ * @param dateString - The date string to normalize (any value parseable by the runtime `Date`).
+ * @returns The date as an ISO-formatted string in `YYYY-MM-DD`.
+ * @throws Error if the input cannot be parsed as a valid date.
+ */
 function normalizeDate(dateString: string): string {
   const date = new Date(dateString);
   if (isNaN(date.getTime())) {
@@ -149,7 +160,14 @@ function normalizeDate(dateString: string): string {
   return date.toISOString().split('T')[0]; // Return YYYY-MM-DD format
 }
 
-// Helper function to normalize time format
+/**
+ * Normalize a time string to 24-hour `HH:MM` format.
+ *
+ * @param timeString - Time in `HH:MM` or `HH:MM AM/PM` form (hours may be 1 or 2 digits; minutes must be 2 digits). AM/PM is case-insensitive and optional.
+ * @returns The time formatted as `HH:MM` using 24-hour notation (zero-padded hours).
+ * @throws Error('Invalid time format. Use HH:MM or HH:MM AM/PM') if `timeString` doesn't match accepted patterns.
+ * @throws Error('Invalid time values') if parsed hour or minute values are out of range.
+ */
 function normalizeTime(timeString: string): string {
   // Handle various time formats and convert to HH:MM (24-hour format)
   const timeRegex = /^(\d{1,2}):(\d{2})(\s*(AM|PM))?$/i;
