@@ -37,6 +37,7 @@ const EventDetailsPage = async ({params}: {params: Promise<{slug: string}>}) => 
     const {slug} = await params;
     const response = await fetch(`${BASE_URL}/api/events/${slug}`)
     const {event: {
+      _id,
       description,
       image,
       overview,
@@ -99,7 +100,7 @@ const EventDetailsPage = async ({params}: {params: Promise<{slug: string}>}) => 
                   Be the first to book your spot!
                 </p>
               )}
-              <BookEvent />
+              <BookEvent eventId={_id} slug={slug}/>
             </div>
           </aside>
         </div>
