@@ -17,6 +17,9 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   experimental: {
     turbopackFileSystemCacheForDev: true,
+    serverActions: {
+      allowedOrigins: ['localhost:3000', 'localhost:3001', '*.app.github.dev'],
+    },
   }
 };
 
